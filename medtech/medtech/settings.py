@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,13 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_yasg',
+    'corsheaders',
     'ckeditor',
     'polls',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -103,18 +108,53 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+CORS_ALLOWED_ORIGINS = [
+"http://localhost:8080",
+"https://jurnal-uz.netlify.app",
+]
+
+CORS_ALLOW_ALL_ORIGINS=True
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'uz-uz'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
+LANGUAGES = [
+    ('uz', "Uzbek"),
+    ('ru', "Russian"),
+]
 
+gettext = lambda s: s
+LANGUAGES = (
+    ('uz', gettext('O\'zbek')),
+    ('ru', gettext('Russian')),
+)
+
+MODELTRANSLATION_LANGUAGES = ('uz', 'ru')
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('uz', 'ru')
+
+
+MODELTRANSLATION_TRANSLATION_FILES = (
+    'polls.translation',
+)
+
+DATE_INPUT_FORMATS = ['%d.%m.%Y']
+
+
+
+
+
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
