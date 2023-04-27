@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
+
 class News(models.Model):
     title = models.CharField(max_length=500)
     subtitle = models.CharField(max_length=500)
@@ -78,7 +79,8 @@ class LidersCategories(models.Model):
 
 
 class Liders(models.Model):
-    category = models.ForeignKey(LidersCategories, on_delete=models.CASCADE, related_name='lider', blank=True, null=True)
+    category = models.ForeignKey(
+        LidersCategories, on_delete=models.CASCADE, related_name='lider', blank=True, null=True)
     model = models.CharField(max_length=500)
     country = models.CharField(max_length=100)
     postavshik = models.CharField(max_length=100)
@@ -105,7 +107,8 @@ class CategoryOborodvnya(models.Model):
 
 
 class Equipment(models.Model):
-    category = models.ForeignKey(CategoryOborodvnya, on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(
+        CategoryOborodvnya, on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to='images/', blank=True)
     model = models.CharField(max_length=500)
     views = models.IntegerField(default=0)
@@ -126,7 +129,13 @@ class Equipment(models.Model):
 
 
 class EquipmentImage(models.Model):
-    Image = models.ForeignKey(Equipment, on_delete=models.CASCADE, related_name='equipment_images', blank=True, null=True)
+    equipment = models.ForeignKey(
+        Equipment,
+        on_delete=models.CASCADE,
+        related_name='equipment_images',
+        blank=True,
+        null=True
+    )
     image = models.ImageField(upload_to='images/', blank=True)
 
 
@@ -138,7 +147,8 @@ class CategoryReagents(models.Model):
 
 
 class Reagents(models.Model):
-    category = models.ForeignKey(CategoryReagents, on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(
+        CategoryReagents, on_delete=models.CASCADE, blank=True, null=True)
     model = models.CharField(max_length=500)
     title = models.CharField(max_length=500)
     releasedate = models.DateField()
@@ -160,7 +170,8 @@ class CategoryConsumables(models.Model):
 
 
 class Consumables(models.Model):
-    category = models.ForeignKey(CategoryConsumables, on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(
+        CategoryConsumables, on_delete=models.CASCADE, blank=True, null=True)
     model = models.CharField(max_length=500)
     title = models.CharField(max_length=500)
     unit = models.IntegerField()
@@ -181,7 +192,8 @@ class CategoryService(models.Model):
 
 
 class Parts(models.Model):
-    category = models.ForeignKey(CategoryService, on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(
+        CategoryService, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=500)
     unit = models.IntegerField()
     manufacturer = models.CharField(max_length=500)
@@ -194,7 +206,8 @@ class Parts(models.Model):
 
 
 class Repair(models.Model):
-    category = models.ForeignKey(CategoryService, on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(
+        CategoryService, on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
     title = models.CharField(max_length=500)
     views = models.IntegerField(default=0)
@@ -212,5 +225,6 @@ class Repair(models.Model):
 
 
 class RepairImage(models.Model):
-    Repair = models.ForeignKey(Repair, on_delete=models.CASCADE, blank=True, null=True)
+    Repair = models.ForeignKey(
+        Repair, on_delete=models.CASCADE, related_name="images", blank=True, null=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)

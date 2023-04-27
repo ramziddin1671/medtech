@@ -19,6 +19,7 @@ urlpatterns = [
     path("CategoryOborodvnya/", views.CategoryOborodvnyaList.as_view()),
     path("EquipmentList/", views.EquipmentList.as_view()),
     path("EquipmentDetail/<int:pk>/", views.EquipmentDetail.as_view()),
+    path("EquipmentTouchAdd/<int:pk>/", views.EquipmentTouchAdd.as_view()),
     path("CategoryReagents/", views.CategoryReagentsList.as_view()),
     path("ReagentList/", views.ReagentsList.as_view()),
     path("CategoryConsumables/", views.CategoryConsumablesList.as_view()),
@@ -27,4 +28,5 @@ urlpatterns = [
     path("PartsList/", views.PartsList.as_view()),
     path("RepairList/", views.RepairList.as_view()),
     path("RepairDetail/<int:pk>/", views.RepairDetail.as_view()),
+    path("RepairTouchAdd/<int:pk>/", views.RepairTouchAdd.as_view()),
 ]

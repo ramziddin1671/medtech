@@ -1,31 +1,29 @@
-import datetime
 from rest_framework import serializers
-from . import models
-from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
-import json
-
-from .models import LidersCategories
+from . import models
 
 
 class NewsSerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = ('id', 'title_uz', 'title_ru', 'subtitle_uz', 'subtitle_ru', 'description_uz', 'description_ru', 'date', 'views', 'image', 'keyword_uz', 'keyword_ru', )
+        fields = ('id', 'title_uz', 'title_ru', 'subtitle_uz', 'subtitle_ru', 'description_uz',
+                  'description_ru', 'date', 'views', 'image', 'keyword_uz', 'keyword_ru', )
         model = models.News
 
 
 class WebSerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = ('id', 'logo', 'address_uz', 'address_ru', 'email', 'phone', 'facebook', 'instagram', 'youtube', 'telegram',)
+        fields = ('id', 'logo', 'address_uz', 'address_ru', 'email',
+                  'phone', 'facebook', 'instagram', 'youtube', 'telegram',)
         model = models.Web
 
 
 class BannerSerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = ('id', 'title_uz', 'title_ru', 'description_uz', 'description_ru', 'image', 'button_uz', 'button_ru', 'button_phone',)
+        fields = ('id', 'title_uz', 'title_ru', 'description_uz',
+                  'description_ru', 'image', 'button_uz', 'button_ru', 'button_phone',)
         model = models.Banner
 
 
@@ -58,87 +56,68 @@ class RequestcallSerializer(serializers.ModelSerializer):
 
 
 class LidersCategoriesSerializer(serializers.ModelSerializer):
-    # subdivisions = serializers.SerializerMethodField()
 
     class Meta:
         fields = ('id', 'name_uz', 'name_ru',)
         model = models.LidersCategories
 
-    # def get_subdivisions(self, instance):
-    #     subdivisions = models.Liders.objects.filter(category=instance).order_by('position')
-    #     return LidersSerializer(subdivisions, many=True, context={"request": self.context.get("request")}).data
-
 
 class LidersSerializer(serializers.ModelSerializer):
+    category = LidersCategoriesSerializer(many=False, read_only=True)
 
     class Meta:
-        fields = ('id', 'lider', 'model_uz', 'model_ru', 'country_uz', 'country_ru', 'postavshik_uz', 'postavshik_ru',
-                  'brend_uz', 'brend_ru', 'description_uz', 'description_ru','instagram','telegram','phone','email',
+        fields = ('id', 'category', 'model_uz', 'model_ru', 'country_uz', 'country_ru', 'postavshik_uz', 'postavshik_ru',
+                  'brend_uz', 'brend_ru', 'description_uz', 'description_ru', 'instagram', 'telegram', 'phone', 'email',
                   'image', 'price', 'pulbirligi_uz', 'pulbirligi_ru', 'views',)
         model = models.Liders
 
-    def getName(self,  object):
-        return "__"+str(object.name)+"__"
-
 
 class CategoryOborodvnyaSerializer(serializers.ModelSerializer):
-    # subdivisions = serializers.SerializerMethodField()
-
     class Meta:
         fields = ('id', 'name_uz', 'name_ru',)
         model = models.CategoryOborodvnya
 
 
 class EquipmentImageSerializer(serializers.ModelSerializer):
-    equipment_images = serializers.SerializerMethodField()
-
     class Meta:
-        fields = ('id', 'Image', 'image',)
+        fields = ('id', 'image')
         model = models.EquipmentImage
 
 
 class EquipmentSerializer(serializers.ModelSerializer):
-    # equipment_images = serializers.SerializerMethodField()
+    equipment_images = EquipmentImageSerializer(many=True, read_only=True)
+    category = CategoryOborodvnyaSerializer(many=False, read_only=True)
 
     class Meta:
         fields = ('id', 'category', 'image', 'model_uz', 'model_ru', 'views', 'touch', 'country_uz', 'country_ru', 'supplier_uz', 'supplier_ru',
-                  'brand_uz', 'brand_ru', 'description_uz', 'description_ru','instagram','telegram','phone','email',
+                  'brand_uz', 'brand_ru', 'description_uz', 'description_ru', 'instagram', 'telegram', 'phone', 'email',
                   'image', 'price', 'pulbirligi_uz', 'pulbirligi_ru', 'equipment_images',)
         model = models.Equipment
 
-        # def get_equipment_images(self, instance):
-        #     equipment_images = models.EquipmentImage.objects.filter(Image=instance)
-        #     return EquipmentImageSerializer(equipment_images, many=True, read_only=True,
-        #                                  context={"request": self.context.get("request")}).data
-
 
 class CategoryReagentsSerializer(serializers.ModelSerializer):
-    # subdivisions = serializers.SerializerMethodField()
-
     class Meta:
         fields = ('id', 'name_uz', 'name_ru',)
         model = models.CategoryReagents
 
 
 class ReagentsSerializer(serializers.ModelSerializer):
-    # subdivisions = serializers.SerializerMethodField()
+    category = CategoryReagentsSerializer(many=False, read_only=True)
 
     class Meta:
         fields = ('id', 'category', 'model_uz', 'model_ru', 'title_uz', 'title_ru', 'releasedate',
-                  'manufacturer_uz', 'manufacturer_ru', 'tests', 'supplier_uz','supplier_ru','phone','price',)
+                  'manufacturer_uz', 'manufacturer_ru', 'tests', 'supplier_uz', 'supplier_ru', 'phone', 'price',)
         model = models.Reagents
 
 
 class CategoryConsumablesSerializer(serializers.ModelSerializer):
-    # subdivisions = serializers.SerializerMethodField()
-
     class Meta:
         fields = ('id', 'name_uz', 'name_ru',)
         model = models.CategoryConsumables
 
 
 class ConsumablesSerializer(serializers.ModelSerializer):
-    # subdivisions = serializers.SerializerMethodField()
+    category = CategoryConsumablesSerializer(many=False, read_only=True)
 
     class Meta:
         fields = ('id', 'category', 'model_uz', 'model_ru', 'title_uz', 'title_ru', 'unit',
@@ -147,15 +126,13 @@ class ConsumablesSerializer(serializers.ModelSerializer):
 
 
 class CategoryServiceSerializer(serializers.ModelSerializer):
-    # subdivisions = serializers.SerializerMethodField()
-
     class Meta:
         fields = ('id', 'name_uz', 'name_ru',)
         model = models.CategoryService
 
 
 class PartsSerializer(serializers.ModelSerializer):
-    # subdivisions = serializers.SerializerMethodField()
+    category = CategoryServiceSerializer(many=False, read_only=True)
 
     class Meta:
         fields = ('id', 'category', 'title_uz', 'title_ru', 'unit',
@@ -163,10 +140,17 @@ class PartsSerializer(serializers.ModelSerializer):
         model = models.Parts
 
 
+class RepairImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('id', 'image')
+        model = models.RepairImage
+
+
 class RepairSerializer(serializers.ModelSerializer):
-    # subdivisions = serializers.SerializerMethodField()
+    images = RepairImageSerializer(many=True, read_only=True)
+    category = CategoryServiceSerializer(many=False, read_only=True)
 
     class Meta:
         fields = ('id', 'category', 'image', 'title_uz', 'title_ru', 'views', 'touch', 'organization_uz',  'organization_ru', 'description_uz',
-                  'description_ru', 'instagram', 'telegram', 'phone', 'email', 'price',)
+                  'description_ru', 'instagram', 'telegram', 'phone', 'email', 'price', 'images',)
         model = models.Repair

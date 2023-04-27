@@ -1,18 +1,24 @@
-from django.shortcuts import render
 from rest_framework import generics, status
+from rest_framework.views import APIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
+
+from rest_framework import filters as rf_filters
+from django_filters import rest_framework as filters
 
 from . import paginations
 from . import serializers
 from . import models
 # Create your views here.
 
+
 class NewsList(generics.ListAPIView):
     queryset = models.News.objects.all()
     serializer_class = serializers.NewsSerializer
     pagination_class = paginations.PaginateBy16
+    filter_backends = (rf_filters.SearchFilter,)
+    search_fields = 'title_uz', 'title_ru', 'subtitle_uz', 'subtitle_ru', 'description_uz', 'description_ru', 'keyword'
 
 
 class NewsDetail(generics.RetrieveAPIView):
@@ -28,7 +34,8 @@ class NewsDetail(generics.RetrieveAPIView):
             news.save()
         except models.News.DoesNotExist:
             return Response({'error_message': error_message}, status=status.HTTP_404_NOT_FOUND)
-        serializer = serializers.NewsSerializer(news, context={"request": request})
+        serializer = serializers.NewsSerializer(
+            news, context={"request": request})
         return Response(serializer.data)
 
 
@@ -45,6 +52,8 @@ class BannerList(generics.ListAPIView):
 class FaqList(generics.ListAPIView):
     queryset = models.Faq.objects.all()
     serializer_class = serializers.FaqSerializer
+    filter_backends = (rf_filters.SearchFilter,)
+    search_fields = 'question_uz', 'question_ru', 'answer_uz', 'answer_ru'
 
 
 class PartnerList(generics.ListAPIView):
@@ -96,7 +105,8 @@ class LidersDetail(generics.RetrieveAPIView):
             liders.save()
         except models.Liders.DoesNotExist:
             return Response({'error_message': error_message}, status=status.HTTP_404_NOT_FOUND)
-        serializer = serializers.LidersSerializer(liders, context={"request": request})
+        serializer = serializers.LidersSerializer(
+            liders, context={"request": request})
         return Response(serializer.data)
 
 
@@ -109,6 +119,38 @@ class EquipmentList(generics.ListAPIView):
     queryset = models.Equipment.objects.all().order_by('-id')
     serializer_class = serializers.EquipmentSerializer
     pagination_class = paginations.PaginateBy9
+    filter_backends = (rf_filters.SearchFilter,
+                       rf_filters.OrderingFilter,
+                       filters.DjangoFilterBackend)
+    search_fields = (
+        'category__name_uz',
+        'category__name_ru',
+        'model_uz',
+        'model_ru',
+        'country_uz',
+        'country_ru',
+        'supplier_uz',
+        'supplier_ru',
+        'brand_uz',
+        'brand_ru',
+        'description_uz',
+        'description_ru',
+        'pulbirligi_uz',
+        'pulbirligi_ru',
+    )
+    ordering_fields = (
+        'model_uz',
+        'model_ru',
+        'country_uz',
+        'country_ru',
+        'supplier_uz',
+        'supplier_ru',
+        'brand_uz',
+        'brand_ru',
+    )
+    filterset_fields = (
+        'category__id',
+    )
 
 
 class EquipmentDetail(generics.RetrieveAPIView):
@@ -123,8 +165,19 @@ class EquipmentDetail(generics.RetrieveAPIView):
             Equipment.save()
         except models.Equipment.DoesNotExist:
             return Response({'error_message': error_message}, status=status.HTTP_404_NOT_FOUND)
-        serializer = serializers.EquipmentSerializer(Equipment, context={"request": request})
+        serializer = serializers.EquipmentSerializer(
+            Equipment, context={"request": request})
         return Response(serializer.data)
+
+
+class EquipmentTouchAdd(APIView):
+    def get(self, request, pk):
+        repair = models.Equipment.objects.filter(pk=pk).first()
+        if repair:
+            repair.touch += 1
+            repair.save()
+            return Response({'success': True})
+        return Response({'success': False})
 
 
 class CategoryReagentsList(generics.ListAPIView):
@@ -178,5 +231,16 @@ class RepairDetail(generics.RetrieveAPIView):
             Repair.save()
         except models.Repair.DoesNotExist:
             return Response({'error_message': error_message}, status=status.HTTP_404_NOT_FOUND)
-        serializer = serializers.RepairSerializer(Repair, context={"request": request})
+        serializer = serializers.RepairSerializer(
+            Repair, context={"request": request})
         return Response(serializer.data)
+
+
+class RepairTouchAdd(APIView):
+    def get(self, request, pk):
+        repair = models.Repair.objects.filter(pk=pk).first()
+        if repair:
+            repair.touch += 1
+            repair.save()
+            return Response({'success': True})
+        return Response({'success': False})

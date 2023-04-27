@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'ckeditor',
+    'django_filters',
     'polls',
 ]
 
@@ -109,11 +110,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 CORS_ALLOWED_ORIGINS = [
-"http://localhost:8080",
-"https://jurnal-uz.netlify.app",
+    "http://localhost:8080",
+    "https://jurnal-uz.netlify.app",
 ]
 
-CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -133,7 +134,10 @@ LANGUAGES = [
     ('ru', "Russian"),
 ]
 
-gettext = lambda s: s
+
+def gettext(s): return s
+
+
 LANGUAGES = (
     ('uz', gettext('O\'zbek')),
     ('ru', gettext('Russian')),
@@ -151,15 +155,12 @@ MODELTRANSLATION_TRANSLATION_FILES = (
 DATE_INPUT_FORMATS = ['%d.%m.%Y']
 
 
-
-
-
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -167,14 +168,14 @@ STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#CKEDITOR CONFIGS
+# CKEDITOR CONFIGS
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Full',
     },
 }
 
-#Media
+# Media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
