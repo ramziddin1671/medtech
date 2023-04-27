@@ -94,6 +94,7 @@ class Liders(models.Model):
     price = models.FloatField()
     pulbirligi = models.CharField(max_length=10)
     views = models.IntegerField(default=0)
+    touch = models.IntegerField(default=0)
 
     def __str__(self):
         return self.model

@@ -110,6 +110,16 @@ class LidersDetail(generics.RetrieveAPIView):
         return Response(serializer.data)
 
 
+class LidersTouchAdd(APIView):
+    def get(self, request, pk):
+        liders = models.Liders.objects.filter(pk=pk).first()
+        if liders:
+            liders.touch += 1
+            liders.save()
+            return Response({'success': True})
+        return Response({'success': False})
+
+
 class CategoryOborodvnyaList(generics.ListAPIView):
     queryset = models.CategoryOborodvnya.objects.all()
     serializer_class = serializers.CategoryOborodvnyaSerializer
@@ -189,6 +199,44 @@ class ReagentsList(generics.ListAPIView):
     queryset = models.Reagents.objects.all().order_by('-id')
     serializer_class = serializers.ReagentsSerializer
     pagination_class = paginations.PaginateBy25
+    filter_backends = (rf_filters.SearchFilter,
+                       rf_filters.OrderingFilter,
+                       filters.DjangoFilterBackend)
+    search_fields = (
+        'category__name_uz',
+        'category__name_ru',
+        'model_uz',
+        'model_ru',
+        'title_uz',
+        'title_ru',
+        'releasedate',
+        'manufacturer_uz',
+        'manufacturer_ru',
+        'tests',
+        'price',
+        'supplier_uz',
+        'supplier_ru',
+        'phone',
+    )
+    ordering_fields = (
+        'category__name_uz',
+        'category__name_ru',
+        'model_uz',
+        'model_ru',
+        'title_uz',
+        'title_ru',
+        'releasedate',
+        'manufacturer_uz',
+        'manufacturer_ru',
+        'tests',
+        'price',
+        'supplier_uz',
+        'supplier_ru',
+        'phone',
+    )
+    filterset_fields = (
+        'category__id',
+    )
 
 
 class CategoryConsumablesList(generics.ListAPIView):
@@ -200,6 +248,42 @@ class ConsumablesList(generics.ListAPIView):
     queryset = models.Consumables.objects.all().order_by('-id')
     serializer_class = serializers.ConsumablesSerializer
     pagination_class = paginations.PaginateBy25
+    filter_backends = (rf_filters.SearchFilter,
+                       rf_filters.OrderingFilter,
+                       filters.DjangoFilterBackend)
+    search_fields = (
+        'category__name_uz',
+        'category__name_ru',
+        'model_uz',
+        'model_ru',
+        'title_uz',
+        'title_ru',
+        'unit',
+        'manufacturer_uz',
+        'manufacturer_ru',
+        'organization_uz',
+        'organization_ru',
+        'price',
+        'phone',
+    )
+    ordering_fields = (
+        'category__name_uz',
+        'category__name_ru',
+        'model_uz',
+        'model_ru',
+        'title_uz',
+        'title_ru',
+        'unit',
+        'manufacturer_uz',
+        'manufacturer_ru',
+        'organization_uz',
+        'organization_ru',
+        'price',
+        'phone',
+    )
+    filterset_fields = (
+        'category__id',
+    )
 
 
 class CategoryServiceList(generics.ListAPIView):
@@ -211,12 +295,68 @@ class PartsList(generics.ListAPIView):
     queryset = models.Parts.objects.all().order_by('-id')
     serializer_class = serializers.PartsSerializer
     pagination_class = paginations.PaginateBy25
+    filter_backends = (rf_filters.SearchFilter,
+                       rf_filters.OrderingFilter,
+                       filters.DjangoFilterBackend)
+    search_fields = (
+        'category__name_uz',
+        'category__name_ru',
+        'title_uz',
+        'title_ru',
+        'unit',
+        'manufacturer_uz',
+        'manufacturer_ru',
+        'organization_uz',
+        'organization_ru',
+        'price',
+        'phone',
+    )
+    ordering_fields = (
+        'category__name_uz',
+        'category__name_ru',
+        'title_uz',
+        'title_ru',
+        'unit',
+        'manufacturer_uz',
+        'manufacturer_ru',
+        'organization_uz',
+        'organization_ru',
+        'price',
+        'phone',
+    )
+    filterset_fields = (
+        'category__id',
+    )
 
 
 class RepairList(generics.ListAPIView):
     queryset = models.Repair.objects.all().order_by('-id')
     serializer_class = serializers.RepairSerializer
     pagination_class = paginations.PaginateBy10
+    filter_backends = (rf_filters.SearchFilter,
+                       rf_filters.OrderingFilter,
+                       filters.DjangoFilterBackend)
+    search_fields = (
+        'category__name_uz',
+        'category__name_ru',
+        'title_uz',
+        'title_ru',
+        'organization_uz',
+        'organization_ru',
+        'description_uz',
+        'description_ru',
+    )
+    ordering_fields = (
+        'category__name_uz',
+        'category__name_ru',
+        'title_uz',
+        'title_ru',
+        'organization_uz',
+        'organization_ru',
+    )
+    filterset_fields = (
+        'category__id',
+    )
 
 
 class RepairDetail(generics.RetrieveAPIView):

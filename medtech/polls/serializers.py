@@ -68,7 +68,7 @@ class LidersSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'category', 'model_uz', 'model_ru', 'country_uz', 'country_ru', 'postavshik_uz', 'postavshik_ru',
                   'brend_uz', 'brend_ru', 'description_uz', 'description_ru', 'instagram', 'telegram', 'phone', 'email',
-                  'image', 'price', 'pulbirligi_uz', 'pulbirligi_ru', 'views',)
+                  'image', 'price', 'pulbirligi_uz', 'pulbirligi_ru', 'views', 'touch',)
         model = models.Liders
 
 

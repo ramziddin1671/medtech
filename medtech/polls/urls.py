@@ -16,6 +16,7 @@ urlpatterns = [
     path("LidersCategories/", views.LidersCategoriesList.as_view()),
     path("LidersList/", views.LidersList.as_view()),
     path("LidersDetail/<int:pk>/", views.LidersDetail.as_view()),
+    path("LidersTouchAdd/<int:pk>/", views.LidersTouchAdd.as_view()),
     path("CategoryOborodvnya/", views.CategoryOborodvnyaList.as_view()),
     path("EquipmentList/", views.EquipmentList.as_view()),
     path("EquipmentDetail/<int:pk>/", views.EquipmentDetail.as_view()),
