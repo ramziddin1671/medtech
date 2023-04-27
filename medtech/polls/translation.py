@@ -29,3 +29,48 @@ class LidersCategoriesTranslationOptions(TranslationOptions):
 @register(models.Liders)
 class LidersTranslationOptions(TranslationOptions):
     fields = ('model', 'country', 'postavshik', 'brend', 'description', 'pulbirligi',)
+
+
+@register(models.CategoryOborodvnya)
+class CategoryOborodvnyaTranslationOptions(TranslationOptions):
+    fields = ('name',)
+
+
+@register(models.Equipment)
+class EquipmentTranslationOptions(TranslationOptions):
+    fields = ('model', 'country', 'supplier', 'brand', 'description', 'pulbirligi',)
+
+
+@register(models.CategoryReagents)
+class CategoryReagentsTranslationOptions(TranslationOptions):
+    fields = ('name',)
+
+
+@register(models.Reagents)
+class ReagentsTranslationOptions(TranslationOptions):
+    fields = ('model', 'title', 'manufacturer', 'supplier',)
+
+
+@register(models.CategoryConsumables)
+class CategoryConsumablesTranslationOptions(TranslationOptions):
+    fields = ('name',)
+
+
+@register(models.Consumables)
+class ConsumablesTranslationOptions(TranslationOptions):
+    fields = ('model', 'title', 'manufacturer', 'organization',)
+
+
+@register(models.CategoryService)
+class CategoryServiceTranslationOptions(TranslationOptions):
+    fields = ('name',)
+
+
+@register(models.Parts)
+class PartsTranslationOptions(TranslationOptions):
+    fields = ('title', 'manufacturer', 'organization',)
+
+
+@register(models.Repair)
+class RepairTranslationOptions(TranslationOptions):
+    fields = ('title', 'organization', 'description',)

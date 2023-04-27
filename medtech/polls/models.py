@@ -78,7 +78,7 @@ class LidersCategories(models.Model):
 
 
 class Liders(models.Model):
-    category = models.ForeignKey(LidersCategories, on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(LidersCategories, on_delete=models.CASCADE, related_name='lider', blank=True, null=True)
     model = models.CharField(max_length=500)
     country = models.CharField(max_length=100)
     postavshik = models.CharField(max_length=100)
@@ -91,6 +91,7 @@ class Liders(models.Model):
     image = models.ImageField(upload_to='images/', blank=True)
     price = models.FloatField()
     pulbirligi = models.CharField(max_length=10)
+    views = models.IntegerField(default=0)
 
     def __str__(self):
         return self.model
@@ -118,13 +119,14 @@ class Equipment(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     price = models.FloatField()
+    pulbirligi = models.CharField(max_length=10)
 
     def __str__(self):
         return self.model
 
 
 class EquipmentImage(models.Model):
-    Image = models.ForeignKey(Equipment, on_delete=models.CASCADE, blank=True, null=True)
+    Image = models.ForeignKey(Equipment, on_delete=models.CASCADE, related_name='equipment_images', blank=True, null=True)
     image = models.ImageField(upload_to='images/', blank=True)
 
 

@@ -63,7 +63,7 @@ class RequestDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.RequestSerializer
 
 
-class RequestcallList(generics.ListAPIView):
+class RequestcallList(generics.ListCreateAPIView):
     queryset = models.RequestCall.objects.all()
     serializer_class = serializers.RequestcallSerializer
 
@@ -97,4 +97,86 @@ class LidersDetail(generics.RetrieveAPIView):
         except models.Liders.DoesNotExist:
             return Response({'error_message': error_message}, status=status.HTTP_404_NOT_FOUND)
         serializer = serializers.LidersSerializer(liders, context={"request": request})
+        return Response(serializer.data)
+
+
+class CategoryOborodvnyaList(generics.ListAPIView):
+    queryset = models.CategoryOborodvnya.objects.all()
+    serializer_class = serializers.CategoryOborodvnyaSerializer
+
+
+class EquipmentList(generics.ListAPIView):
+    queryset = models.Equipment.objects.all().order_by('-id')
+    serializer_class = serializers.EquipmentSerializer
+    pagination_class = paginations.PaginateBy9
+
+
+class EquipmentDetail(generics.RetrieveAPIView):
+    queryset = models.Equipment.objects.all()
+    serializer_class = serializers.LidersSerializer
+
+    def get(self, request, pk):
+        error_message = ("Obyekt topilmadi")
+        try:
+            Equipment = models.Equipment.objects.get(id=pk)
+            Equipment.views += 1
+            Equipment.save()
+        except models.Equipment.DoesNotExist:
+            return Response({'error_message': error_message}, status=status.HTTP_404_NOT_FOUND)
+        serializer = serializers.EquipmentSerializer(Equipment, context={"request": request})
+        return Response(serializer.data)
+
+
+class CategoryReagentsList(generics.ListAPIView):
+    queryset = models.CategoryReagents.objects.all()
+    serializer_class = serializers.CategoryReagentsSerializer
+
+
+class ReagentsList(generics.ListAPIView):
+    queryset = models.Reagents.objects.all().order_by('-id')
+    serializer_class = serializers.ReagentsSerializer
+    pagination_class = paginations.PaginateBy25
+
+
+class CategoryConsumablesList(generics.ListAPIView):
+    queryset = models.CategoryConsumables.objects.all()
+    serializer_class = serializers.CategoryConsumablesSerializer
+
+
+class ConsumablesList(generics.ListAPIView):
+    queryset = models.Consumables.objects.all().order_by('-id')
+    serializer_class = serializers.ConsumablesSerializer
+    pagination_class = paginations.PaginateBy25
+
+
+class CategoryServiceList(generics.ListAPIView):
+    queryset = models.CategoryService.objects.all()
+    serializer_class = serializers.CategoryServiceSerializer
+
+
+class PartsList(generics.ListAPIView):
+    queryset = models.Parts.objects.all().order_by('-id')
+    serializer_class = serializers.PartsSerializer
+    pagination_class = paginations.PaginateBy25
+
+
+class RepairList(generics.ListAPIView):
+    queryset = models.Repair.objects.all().order_by('-id')
+    serializer_class = serializers.RepairSerializer
+    pagination_class = paginations.PaginateBy10
+
+
+class RepairDetail(generics.RetrieveAPIView):
+    queryset = models.Repair.objects.all()
+    serializer_class = serializers.RepairSerializer
+
+    def get(self, request, pk):
+        error_message = ("Obyekt topilmadi")
+        try:
+            Repair = models.Repair.objects.get(id=pk)
+            Repair.views += 1
+            Repair.save()
+        except models.Repair.DoesNotExist:
+            return Response({'error_message': error_message}, status=status.HTTP_404_NOT_FOUND)
+        serializer = serializers.RepairSerializer(Repair, context={"request": request})
         return Response(serializer.data)
