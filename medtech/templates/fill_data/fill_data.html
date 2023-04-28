@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{model.name}}</title>
+</head>
+
+<body>
+    <h1>Ma'lumotlar mavjud bo'lgan excel fileni kiriting</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <select name="category" required>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="file" name="file" accept=".xlsx" required />
+        <input type="submit" value="Yuklash" />
+
+        <br />
+
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    </form>
+
+    <br>
+    <br>
+
+    {% if data %}
+
+    <form action="{% url 'save_data' model.slug %}" method="post">
+        {% csrf_token %}
+        <input type="text" hidden name="category" value="{{category}}">
+        <input type="text" hidden name="data" value="{{data}}">
+        <input type="submit" value="Saqlash" />
+    </form>
+
+    <br>
+
+    <table border="1">
+        <thead>
+            <tr>
+                {% for key in model.fields %}
+                <th>{{ key|title }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                {% for cell in row %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+    </table>
+
+    {% endif %}
+</body>
+
+</html>

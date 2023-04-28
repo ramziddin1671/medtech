@@ -26,15 +26,15 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title = "Medtech",
-        discription = "These are APIs for Medtech platform",
-        default_version = 'v1',
-        terms_of_service = 'https://www.google.com/policies/terms/',
-        contact = openapi.Contact(email='ramziddin_uz@mail.ru'),
+        title="Medtech",
+        discription="These are APIs for Medtech platform",
+        default_version='v1',
+        terms_of_service='https://www.google.com/policies/terms/',
+        contact=openapi.Contact(email='ramziddin_uz@mail.ru'),
         license=openapi.License(name='BSD License'),
     ),
-    public = True,
-    permission_classes = (permissions.AllowAny,),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 
 
@@ -42,13 +42,17 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("polls.urls")),
     path('api-auth/', include('rest_framework.urls')),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('swagger/', schema_view.with_ui('swagger',
+         cache_timeout=0), name='schema-swagger-ui'),
 ]
 urlpatterns += i18n_patterns(
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path("i18n/", include("django.conf.urls.i18n")),
+    path("fill-data/", include("fill_data.urls")),
 )
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

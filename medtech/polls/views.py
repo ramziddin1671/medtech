@@ -36,7 +36,11 @@ class NewsDetail(generics.RetrieveAPIView):
             return Response({'error_message': error_message}, status=status.HTTP_404_NOT_FOUND)
         serializer = serializers.NewsSerializer(
             news, context={"request": request})
-        return Response(serializer.data)
+
+        other_news = models.News.objects.order_by('-date').exclude(id=pk)[:4]
+        other_news_serializer = serializers.NewsSerializer(
+            other_news, context={"request": request}, many=True)
+        return Response({'news': serializer.data, 'other_news': other_news_serializer.data})
 
 
 class WebList(generics.ListAPIView):
