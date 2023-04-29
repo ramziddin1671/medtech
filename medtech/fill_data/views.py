@@ -26,10 +26,13 @@ def get_models():
         {
             'name': _("Rasxodni material"),
             'slug': 'add-consumable',
+            'fields': ['model_uz', 'model_ru', 'title_uz', 'title_ru', 'unit', 'manufacturer_uz', 'manufacturer_ru', 'organization_uz', 'organization_ru', 'price', 'phone']
         },
         {
             'name': _("Servis qo'shish"),
             'slug': 'add-part',
+            'fields': ['title_uz', 'title_ru', 'unit', 'manufacturer_uz', 'manufacturer_ru',
+                       'organization_uz', 'organization_ru', 'price', 'phone']
         }
     ]
 

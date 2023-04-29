@@ -9,12 +9,39 @@
 </head>
 
 <body>
-    <h1>Ma'lumot qo'shish uchun kategoriyani tanlang</h1>
+<style>
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button1 {background-color: #4CAF50;} /* Green */
+
+body {
+  background-image: url('https://www.lifewire.com/thmb/tecqrB3ByCQ7uXk8ZCjjPBXtGNg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/blue-windows-wallpaper-0731200e5d204ee09695a06cb45077d3.jpg');
+
+}
+</style>
+
+    <h1 style="color:white;">Ma'lumot qo'shish uchun kategoriyani tanlang</h1>
     <ul>
         {% for model in models %}
-        <li><a href="{% url 'fill_data' model.slug %}">{{ model.name }}</a></li>
+        <button class="button button1">
+        <li style="color:white;"><a href="{% url 'fill_data' model.slug %}"><h2>{{ model.name }}</h2></a></li>
         {% endfor %}
+        </button>
     </ul>
-</body>
 
+<br>
+<hr>
+<br><br><br>
+<h2 style="color:white;">DataForta your IT company</h2>
+<a href="https://dataforta.uz/"> <img src="https://dataforta.uz/wp-content/uploads/2022/07/Group-40.png"></a>
+</body>
 </html>

@@ -9,7 +9,51 @@
 </head>
 
 <body>
-    <h1>Ma'lumotlar mavjud bo'lgan excel fileni kiriting</h1>
+<style>
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.button1 {background-color: #4CAF50;} /* Green */
+
+body {
+  background-image: url('https://cdn.pixabay.com/photo/2015/12/03/08/50/paper-1074131__340.jpg');
+
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+
+
+    <h1 style="color:black;">Ma'lumotlar mavjud bo'lgan excel fileni kiriting</h1>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -20,8 +64,8 @@
             {% endfor %}
         </select>
 
-        <input type="file" name="file" accept=".xlsx" required />
-        <input type="submit" value="Yuklash" />
+        <button class="button button1"> <input type="file" name="file" accept=".xlsx" required /></button>
+        <button class="button button1"><input type="submit" value="Yuklash" /> </button>
 
         <br />
 
@@ -39,12 +83,12 @@
         {% csrf_token %}
         <input type="text" hidden name="category" value="{{category}}">
         <input type="text" hidden name="data" value="{{data}}">
-        <input type="submit" value="Saqlash" />
+        <button class="button button1"><input type="submit" value="Saqlash" /> </button>
     </form>
 
     <br>
 
-    <table border="1">
+    <table id="customers">
         <thead>
             <tr>
                 {% for key in model.fields %}
@@ -63,6 +107,8 @@
     </table>
 
     {% endif %}
+
+
 </body>
 
 </html>
