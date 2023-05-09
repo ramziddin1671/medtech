@@ -11,6 +11,10 @@ class News(models.Model):
     image = models.ImageField(upload_to='images/', blank=True)
     keyword = models.CharField(max_length=500)
 
+    class Meta:
+        verbose_name = 'новости'
+        verbose_name_plural = 'новости'
+
     def __str__(self):
         return self.title
 
@@ -25,6 +29,10 @@ class Web(models.Model):
     youtube = models.URLField(max_length=500, blank=True, null=True)
     telegram = models.URLField(max_length=500, blank=True, null=True)
 
+    class Meta:
+        verbose_name = 'информация о сайте'
+        verbose_name_plural = 'информация о сайте'
+
 
 class Banner(models.Model):
     title = models.CharField(max_length=500)
@@ -32,6 +40,10 @@ class Banner(models.Model):
     image = models.ImageField(upload_to='images/', blank=True)
     button = models.CharField(max_length=20)
     button_phone = models.CharField(max_length=500)
+
+    class Meta:
+        verbose_name = 'баннер'
+        verbose_name_plural = 'баннер'
 
     def __str__(self):
         return self.title
@@ -49,6 +61,10 @@ class Partners(models.Model):
     logo = models.ImageField(upload_to='images/', blank=True)
     linkPartner = models.URLField(max_length=500, blank=True, null=True)
 
+    class Meta:
+        verbose_name = 'партнёры'
+        verbose_name_plural = 'партнёры'
+
     def __str__(self):
         return self.linkPartner
 
@@ -59,6 +75,10 @@ class Request(models.Model):
     message = models.TextField()
     organization = models.CharField(max_length=200)
 
+    class Meta:
+        verbose_name = 'входящие письма'
+        verbose_name_plural = 'входящие письма'
+
     def __str__(self):
         return self.name
 
@@ -67,12 +87,20 @@ class RequestCall(models.Model):
     name = models.CharField(max_length=100)
     phon_number = models.CharField(max_length=20)
 
+    class Meta:
+        verbose_name = 'заказанные звонки'
+        verbose_name_plural = 'заказанные звонки'
+
     def __str__(self):
         return self.name
 
 
 class LidersCategories(models.Model):
     name = models.CharField(max_length=500)
+
+    class Meta:
+        verbose_name = 'Категория рекламы'
+        verbose_name_plural = 'Категория рекламы'
 
     def __str__(self):
         return self.name
@@ -96,12 +124,20 @@ class Liders(models.Model):
     views = models.IntegerField(default=0)
     touch = models.IntegerField(default=0)
 
+    class Meta:
+        verbose_name = 'рекламы'
+        verbose_name_plural = 'рекламы'
+
     def __str__(self):
         return self.model
 
 
 class CategoryOborodvnya(models.Model):
     name = models.CharField(max_length=500)
+
+    class Meta:
+        verbose_name = 'Категория Обородвинья'
+        verbose_name_plural = 'Категория Обородвинья'
 
     def __str__(self):
         return self.name
@@ -125,6 +161,10 @@ class Equipment(models.Model):
     price = models.FloatField()
     pulbirligi = models.CharField(max_length=10)
 
+    class Meta:
+        verbose_name = 'Обородвинья'
+        verbose_name_plural = 'Обородвинья'
+
     def __str__(self):
         return self.model
 
@@ -143,6 +183,10 @@ class EquipmentImage(models.Model):
 class CategoryReagents(models.Model):
     name = models.CharField(max_length=500)
 
+    class Meta:
+        verbose_name = 'Категория Реагенты'
+        verbose_name_plural = 'Категория Реагенты'
+
     def __str__(self):
         return self.name
 
@@ -159,12 +203,20 @@ class Reagents(models.Model):
     price = models.FloatField()
     phone = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name = 'Реагенты'
+        verbose_name_plural = 'Реагенты'
+
     def __str__(self):
         return self.title
 
 
 class CategoryConsumables(models.Model):
     name = models.CharField(max_length=500)
+
+    class Meta:
+        verbose_name = 'Категория Расходный материал'
+        verbose_name_plural = 'Категория Расходный материал'
 
     def __str__(self):
         return self.name
@@ -181,12 +233,20 @@ class Consumables(models.Model):
     price = models.FloatField()
     phone = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name = 'Расходный материал'
+        verbose_name_plural = 'Расходный материал'
+
     def __str__(self):
         return self.title
 
 
 class CategoryService(models.Model):
     name = models.CharField(max_length=500)
+
+    class Meta:
+        verbose_name = 'Категория Сервис'
+        verbose_name_plural = 'Категория Сервис'
 
     def __str__(self):
         return self.name
@@ -201,6 +261,10 @@ class Parts(models.Model):
     organization = models.CharField(max_length=500)
     price = models.FloatField()
     phone = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'Запчасти'
+        verbose_name_plural = 'Запчасти'
 
     def __str__(self):
         return self.title
@@ -220,6 +284,10 @@ class Repair(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     price = models.FloatField()
+
+    class Meta:
+        verbose_name = 'Ремонт'
+        verbose_name_plural = 'Ремонт'
 
     def __str__(self):
         return self.title
