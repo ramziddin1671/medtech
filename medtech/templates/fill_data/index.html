@@ -6,42 +6,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories</title>
+    <style>
+        /* Green */
+
+        body {
+            background-image: url('https://www.lifewire.com/thmb/tecqrB3ByCQ7uXk8ZCjjPBXtGNg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/blue-windows-wallpaper-0731200e5d204ee09695a06cb45077d3.jpg');
+            font-family: sans-serif;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+        }
+
+        .title {
+            color: white;
+            text-align: center;
+        }
+
+        .models-list {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        .list-item {
+            margin: 10px;
+        }
+
+        .btn {
+            display: block;
+            padding: 15px 32px;
+            cursor: pointer;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 24px;
+            background-color: #4CAF50;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 
 <body>
-<style>
-.button {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-.button1 {background-color: #4CAF50;} /* Green */
-
-body {
-  background-image: url('https://www.lifewire.com/thmb/tecqrB3ByCQ7uXk8ZCjjPBXtGNg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/blue-windows-wallpaper-0731200e5d204ee09695a06cb45077d3.jpg');
-
-}
-</style>
-
-    <h1 style="color:white;">Ma'lumot qo'shish uchun kategoriyani tanlang</h1>
-    <ul>
+    {% if success %}
+    <h1 class="success-message">Ma'lumotlar muvaffaqiyatli qo'shildi</h1>
+    {% endif %}
+    <h1 class="title">Ma'lumot qo'shish uchun kategoriyani tanlang</h1>
+    <ul class="models-list">
         {% for model in models %}
-        <button class="button button1">
-        <li style="color:white;"><a href="{% url 'fill_data' model.slug %}"><h2>{{ model.name }}</h2></a></li>
+        <li class="list-item">
+            <a class="btn" href="{% url 'fill_data' model.slug %}">
+                {{ model.name }}
+            </a>
+        </li>
         {% endfor %}
         </button>
     </ul>
 
-<br>
-<hr>
-<br><br><br>
-<h2 style="color:white;">DataForta your IT company</h2>
-<a href="https://dataforta.uz/"> <img src="https://dataforta.uz/wp-content/uploads/2022/07/Group-40.png"></a>
+    <br>
+    <hr>
+    <br><br><br>
+    <h2 style="color:white;">DataForta your IT company</h2>
+    <a href="https://dataforta.uz/"> <img src="https://dataforta.uz/wp-content/uploads/2022/07/Group-40.png"></a>
 </body>
+
 </html>
