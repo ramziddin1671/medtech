@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'ckeditor',
+    "psycopg2",
     'django_filters',
     'polls',
     'fill_data',
@@ -85,8 +86,12 @@ WSGI_APPLICATION = 'medtech.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ilabbase',
+        'USER': 'root',
+        'PASSWORD': 'ilabaratory',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -112,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "https://jurnal-uz.netlify.app",
+    "https://ilab.uz",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
