@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'ckeditor',
-    "psycopg2",
     'django_filters',
     'polls',
     'fill_data',
@@ -84,14 +83,16 @@ WSGI_APPLICATION = 'medtech.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ilabbase',
-        'USER': 'root',
-        'PASSWORD': 'ilabaratory',
+        'NAME': 'ilabdb',
+        'USER': 'ilabdb_user',
+        'PASSWORD': 'ilabdb_user_password',
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5432'
     }
 }
 
