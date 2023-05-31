@@ -9,21 +9,75 @@
 
     <style>
 
+        /* Green */
+
+        body {
+            background-image: url('https://www.lifewire.com/thmb/tecqrB3ByCQ7uXk8ZCjjPBXtGNg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/blue-windows-wallpaper-0731200e5d204ee09695a06cb45077d3.jpg');
+            font-family: sans-serif;
+        }
+
+        .success-message {
+            text-align: center;
+            color: green;
+        }
+
+        .title {
+            color: white;
+            text-align: center;
+        }
+
+        .models-list {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+        }
+
+        .list-item {
+            margin: 10px;
+        }
+
+        .btn {
+            display: block;
+            padding: 15px 32px;
+            cursor: pointer;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 24px;
+            background-color: #4CAF50;
+            border-radius: 10px;
+        }
+
     </style>
 </head>
 
 <body>
-    <h1>
-        Sayt title
+    <h1 class="title">
+        I Lab
     </h1>
 
     <div>
         {% if user.is_authenticated %}
-        <a href="/admin/">Admin panelga o'tish</a>
-        <a href="/fill-data/">Excel orqali ma'lumot qo'shish</a>
-        <a href="https://google.uz">Saytni ko'rish</a>
-        {% endif %}
+        <ul class="models-list">
+            <li class="list-item">
+        <a class="btn" href="/admin/">Admin panelga o'tish</a><br>
+        <a class="btn" href="/fill-data/">Excel orqali ma'lumot qo'shish</a><br>
+        <a class="btn" href="https://google.uz">Saytni ko'rish</a>
+
+             </li>
+              </ul>
+                {% endif %}
     </div>
+
+
+
+  <br>
+    <hr>
+    <br><br><br>
+    <h2 style="color:white;">DataForta your IT company</h2>
+    <a href="https://dataforta.uz/"> <img src="https://dataforta.uz/wp-content/uploads/2022/07/Group-40.png"></a>
 </body>
 
 </html>

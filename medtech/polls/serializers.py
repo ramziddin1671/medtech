@@ -34,6 +34,13 @@ class FaqSerializer(serializers.ModelSerializer):
         model = models.Faq
 
 
+class AboutSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = ('title_uz', 'title_ru', 'description_uz', 'description_ru', 'video',)
+        model = models.About
+
+
 class PartnerSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -62,7 +69,14 @@ class LidersCategoriesSerializer(serializers.ModelSerializer):
         model = models.LidersCategories
 
 
+class LidersImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = ('id', 'image')
+        model = models.LidersImage
+
+
 class LidersSerializer(serializers.ModelSerializer):
+    liders_images = LidersImageSerializer(many=True, read_only=True)
     category = LidersCategoriesSerializer(many=False, read_only=True)
 
     class Meta:

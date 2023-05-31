@@ -2,6 +2,19 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 
+class About(models.Model):
+    title = models.CharField(max_length=500)
+    description = RichTextField()
+    video = models.URLField()
+
+    class Meta:
+        verbose_name = 'О нас'
+        verbose_name_plural = 'О нас'
+
+    def __str__(self):
+        return self.title
+
+
 class News(models.Model):
     title = models.CharField(max_length=500)
     subtitle = models.CharField(max_length=500)
@@ -130,6 +143,12 @@ class Liders(models.Model):
 
     def __str__(self):
         return self.model
+
+
+class LidersImage(models.Model):
+    Repair = models.ForeignKey(
+        Liders, on_delete=models.CASCADE, related_name="images", blank=True, null=True)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
 
 
 class CategoryOborodvnya(models.Model):

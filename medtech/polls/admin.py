@@ -28,8 +28,24 @@ class RepairAdmin(TranslationAdmin):
     inlines = [PhotoRepair]
 
 
+class PhotoLider(admin.StackedInline):
+    model = LidersImage
+
+
+@admin.register(Liders)
+class LidersAdmin(TranslationAdmin):
+    list_display = ['category', 'model_uz', 'model_ru', 'country_uz', 'country_ru', 'postavshik_uz', 'postavshik_ru', 'brend_uz',  'brend_ru', 'description_uz',
+                  'description_ru', 'instagram', 'telegram', 'phone', 'email', 'price', 'image', 'pulbirligi_uz', 'pulbirligi_ru', 'views', 'touch']
+
+    inlines = [PhotoLider]
+
+
 class NewsAdmin(TranslationAdmin):
     model = News
+
+
+class AboutAdmin(TranslationAdmin):
+    model = About
 
 
 class WebAdmin(TranslationAdmin):
@@ -48,8 +64,7 @@ class LidersCategoriesAdmin(TranslationAdmin):
     model = LidersCategories
 
 
-class LidersAdmin(TranslationAdmin):
-    model = Liders
+
 
 
 class CategoryOborodvnyaAdmin(TranslationAdmin):
@@ -59,28 +74,34 @@ class CategoryOborodvnyaAdmin(TranslationAdmin):
 class CategoryReagentsAdmin(TranslationAdmin):
     model = CategoryReagents
 
-
-class ReagentsAdmin(TranslationAdmin):
-    model = Reagents
+@admin.register(Reagents)
+class RepairAdmin(TranslationAdmin):
+    list_display = ['category', 'model_uz', 'model_ru', 'title_uz', 'title_ru', 'releasedate',
+                  'manufacturer_uz', 'manufacturer_ru', 'tests', 'supplier_uz', 'supplier_ru', 'phone', 'price']
 
 
 class CategoryConsumablesAdmin(TranslationAdmin):
     model = CategoryConsumables
 
 
+@admin.register(Consumables)
 class ConsumablesAdmin(TranslationAdmin):
-    model = Consumables
+    list_display = ['category', 'model_uz', 'model_ru', 'title_uz', 'title_ru', 'unit',
+                  'manufacturer_uz', 'manufacturer_ru', 'organization_uz', 'organization_ru', 'phone', 'price']
 
 
 class CategoryServiceAdmin(TranslationAdmin):
     model = CategoryService
 
 
-class PartsAdmin(TranslationAdmin):
-    model = Parts
+@admin.register(Parts)
+class ConsumablesAdmin(TranslationAdmin):
+    list_display = ['category', 'title_uz', 'title_ru', 'unit',
+                  'manufacturer_uz', 'manufacturer_ru', 'organization_uz', 'organization_ru', 'phone', 'price']
 
 
 # admin.site.register(Equipment, EquipmentGallerys)
+admin.site.register(About, AboutAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Web, WebAdmin)
 admin.site.register(Banner, BannerAdmin)
@@ -89,12 +110,8 @@ admin.site.register(Partners)
 admin.site.register(Request)
 admin.site.register(RequestCall)
 admin.site.register(LidersCategories, LidersCategoriesAdmin)
-admin.site.register(Liders, LidersAdmin)
 admin.site.register(CategoryOborodvnya, CategoryOborodvnyaAdmin)
 admin.site.register(CategoryReagents, CategoryReagentsAdmin)
-admin.site.register(Reagents, ReagentsAdmin)
 admin.site.register(CategoryConsumables, CategoryConsumablesAdmin)
-admin.site.register(Consumables, ConsumablesAdmin)
 admin.site.register(CategoryService, CategoryServiceAdmin)
-admin.site.register(Parts, PartsAdmin)
 # admin.site.register(Repair, PepairGallerys)

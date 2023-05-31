@@ -8,6 +8,7 @@ urlpatterns = [
     path("webcontact/", views.WebList.as_view()),
     path("banner/", views.BannerList.as_view()),
     path("faq/", views.FaqList.as_view()),
+    path("about/", views.About.as_view()),
     path("partners/", views.PartnerList.as_view()),
     path("request/", views.RequestList.as_view()),
     path("request/<int:pk>/", views.RequestDetail.as_view()),

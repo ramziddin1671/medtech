@@ -105,7 +105,7 @@ def save_data(request, model_slug):
     try:
         creation_model.objects.bulk_create(objects)
         if last_obj is not None:
-            creation_model.objects.filter(id__lte=last_obj.id).delete()
+            creation_model.objects.filter(id__lte=last_obj.id).filter(category__id=category).delete()
     except Exception as e:
         return redirect(f'/fill-data/{model_slug}/?error={e}')
 

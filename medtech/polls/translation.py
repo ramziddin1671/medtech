@@ -11,6 +11,11 @@ class WebTranslationOptions(TranslationOptions):
     fields = ('address', )
 
 
+@register(models.About)
+class AboutTranslationOptions(TranslationOptions):
+    fields = ('title', 'description',)
+
+
 @register(models.Banner)
 class BannerTranslationOptions(TranslationOptions):
     fields = ('title', 'description', 'button',)

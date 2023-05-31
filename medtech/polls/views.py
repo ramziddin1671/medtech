@@ -18,7 +18,7 @@ class NewsList(generics.ListAPIView):
     serializer_class = serializers.NewsSerializer
     pagination_class = paginations.PaginateBy16
     filter_backends = (rf_filters.SearchFilter,)
-    search_fields = 'title_uz', 'title_ru', 'subtitle_uz', 'subtitle_ru', 'description_uz', 'description_ru', 'keyword'
+    search_fields = 'title_uz', 'title_ru', 'subtitle_uz', 'subtitle_ru', 'description_uz', 'description_ru', 'image', 'keyword'
 
 
 class NewsDetail(generics.RetrieveAPIView):
@@ -46,6 +46,11 @@ class NewsDetail(generics.RetrieveAPIView):
 class WebList(generics.ListAPIView):
     queryset = models.Web.objects.all()
     serializer_class = serializers.WebSerializer
+
+
+class About(generics.ListAPIView):
+    queryset = models.About.objects.all()
+    serializer_class = serializers.AboutSerializer
 
 
 class BannerList(generics.ListAPIView):
@@ -169,7 +174,7 @@ class EquipmentList(generics.ListAPIView):
 
 class EquipmentDetail(generics.RetrieveAPIView):
     queryset = models.Equipment.objects.all()
-    serializer_class = serializers.LidersSerializer
+    serializer_class = serializers.EquipmentSerializer
 
     def get(self, request, pk):
         error_message = ("Obyekt topilmadi")
