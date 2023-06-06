@@ -43,7 +43,7 @@ class CategoryOborodvnyaTranslationOptions(TranslationOptions):
 
 @register(models.Equipment)
 class EquipmentTranslationOptions(TranslationOptions):
-    fields = ('model', 'country', 'supplier', 'brand', 'description', 'pulbirligi',)
+    fields = ('model', 'country', 'supplier', 'brand', 'description', 'subtitle', 'pulbirligi',)
 
 
 @register(models.CategoryReagents)
@@ -78,4 +78,4 @@ class PartsTranslationOptions(TranslationOptions):
 
 @register(models.Repair)
 class RepairTranslationOptions(TranslationOptions):
-    fields = ('title', 'organization', 'description',)
+    fields = ('title', 'organization', 'description', 'pulbirligi',)

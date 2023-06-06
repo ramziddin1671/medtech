@@ -71,7 +71,7 @@ class LidersCategoriesSerializer(serializers.ModelSerializer):
 
 class LidersImageSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = ('id', 'image')
+        fields = ('id', 'image',)
         model = models.LidersImage
 
 
@@ -82,7 +82,7 @@ class LidersSerializer(serializers.ModelSerializer):
     class Meta:
         fields = ('id', 'category', 'model_uz', 'model_ru', 'country_uz', 'country_ru', 'postavshik_uz', 'postavshik_ru',
                   'brend_uz', 'brend_ru', 'description_uz', 'description_ru', 'instagram', 'telegram', 'phone', 'email',
-                  'image', 'price', 'pulbirligi_uz', 'pulbirligi_ru', 'views', 'touch',)
+                  'image', 'price', 'pulbirligi_uz', 'pulbirligi_ru', 'views', 'touch', 'liders_images',)
         model = models.Liders
 
 
@@ -104,7 +104,7 @@ class EquipmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = ('id', 'category', 'image', 'model_uz', 'model_ru', 'views', 'touch', 'country_uz', 'country_ru', 'supplier_uz', 'supplier_ru',
-                  'brand_uz', 'brand_ru', 'description_uz', 'description_ru', 'instagram', 'telegram', 'phone', 'email',
+                  'brand_uz', 'brand_ru', 'description_uz', 'description_ru', 'subtitle_uz', 'subtitle_ru', 'instagram', 'telegram', 'phone', 'email',
                   'image', 'price', 'pulbirligi_uz', 'pulbirligi_ru', 'equipment_images',)
         model = models.Equipment
 
@@ -166,5 +166,5 @@ class RepairSerializer(serializers.ModelSerializer):
 
     class Meta:
         fields = ('id', 'category', 'image', 'title_uz', 'title_ru', 'views', 'touch', 'organization_uz',  'organization_ru', 'description_uz',
-                  'description_ru', 'instagram', 'telegram', 'phone', 'email', 'price', 'images',)
+                  'description_ru', 'instagram', 'telegram', 'phone', 'email', 'price', 'pulbirligi_uz', 'pulbirligi_ru', 'images',)
         model = models.Repair

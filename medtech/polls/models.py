@@ -146,7 +146,7 @@ class Liders(models.Model):
 
 
 class LidersImage(models.Model):
-    Repair = models.ForeignKey(
+    liders = models.ForeignKey(
         Liders, on_delete=models.CASCADE, related_name="images", blank=True, null=True)
     image = models.ImageField(upload_to='images/', blank=True, null=True)
 
@@ -173,6 +173,7 @@ class Equipment(models.Model):
     supplier = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
     description = RichTextField()
+    subtitle = models.CharField(max_length=500, blank=True, null=True)
     instagram = models.URLField(max_length=500, blank=True, null=True)
     telegram = models.URLField(max_length=500, blank=True, null=True)
     phone = models.CharField(max_length=15)
@@ -303,6 +304,7 @@ class Repair(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField()
     price = models.FloatField()
+    pulbirligi = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Ремонт'

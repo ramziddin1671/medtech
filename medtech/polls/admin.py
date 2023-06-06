@@ -11,7 +11,7 @@ class PhotoInline(admin.StackedInline):
 @admin.register(Equipment)
 class EquipmentAdmin(TranslationAdmin):
 
-    list_display = ['category','views', 'touch', "image", 'model', 'country', 'supplier', 'brand', 'description', 'instagram',
+    list_display = ['category','views', 'touch', "image", 'model', 'country', 'supplier', 'brand', 'description', 'subtitle', 'instagram',
                            'telegram', 'phone', 'email', 'price']
     inlines = [PhotoInline]
 
@@ -23,7 +23,7 @@ class PhotoRepair(admin.StackedInline):
 @admin.register(Repair)
 class RepairAdmin(TranslationAdmin):
     list_display = ['category', 'image', 'title_uz', 'title_ru', 'views', 'touch', 'organization_uz',  'organization_ru', 'description_uz',
-                  'description_ru', 'instagram', 'telegram', 'phone', 'email', 'price']
+                  'description_ru', 'instagram', 'telegram', 'phone', 'email', 'price', 'pulbirligi']
 
     inlines = [PhotoRepair]
 

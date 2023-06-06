@@ -14,7 +14,7 @@ from . import models
 
 
 class NewsList(generics.ListAPIView):
-    queryset = models.News.objects.all()
+    queryset = models.News.objects.all().order_by('-date')
     serializer_class = serializers.NewsSerializer
     pagination_class = paginations.PaginateBy16
     filter_backends = (rf_filters.SearchFilter,)
@@ -54,7 +54,7 @@ class About(generics.ListAPIView):
 
 
 class BannerList(generics.ListAPIView):
-    queryset = models.Banner.objects.all()
+    queryset = models.Banner.objects.all().order_by('-id')
     serializer_class = serializers.BannerSerializer
 
 
@@ -93,7 +93,7 @@ class RequestcallDetail(RetrieveUpdateDestroyAPIView):
 
 
 class LidersCategoriesList(generics.ListAPIView):
-    queryset = models.LidersCategories.objects.all()
+    queryset = models.LidersCategories.objects.all().order_by
     serializer_class = serializers.LidersCategoriesSerializer
 
 
